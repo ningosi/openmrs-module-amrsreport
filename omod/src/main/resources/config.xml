@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<module configVersion="1.2">
+	
+	<!-- Base Module Properties -->
+	<id>@MODULE_ID@</id>
+	<name>@MODULE_NAME@</name>
+	<version>@MODULE_VERSION@</version>
+	<package>@MODULE_PACKAGE@</package>
+	<author>Oliver Mwalo and Nicholas Ingosi</author>
+	<description>
+			AMRS Reporting Module. MOH Pre-Register Reporting Module.
+	</description>
+
+	<activator>org.openmrs.module.amrsreport.AmrsReportModuleActivator</activator>
+	
+	<!-- <updateURL>https://modules.openmrs.org/modules/download/@MODULE_ID@/update.rdf</updateURL> -->
+	<!-- /Base Module Properties -->
+	
+	<require_modules>
+		<require_module version="0.7.0">org.openmrs.module.reporting</require_module>
+	</require_modules>
+	<require_version>1.8.0</require_version>
+	
+	<!-- Extensions -->
+	<extension>
+		<point>org.openmrs.admin.list</point>
+		<class>org.openmrs.module.amrsreport.ext.AmrsReportAdminExt</class>
+	</extension>
+	
+	
+	<!-- AOP
+	<advice>
+		<point>org.openmrs.api.FormService</point>
+		<class>@MODULE_PACKAGE@.advice.DuplicateFormAdvisor</class>
+	</advice>
+	 /AOP -->
+	
+	
+	<!-- Required Privileges -->
+	<privilege>
+		<name>Manage AMRSReports</name>
+		<description>Allows user to access Amrs reports pages/functions</description>
+	</privilege>
+
+
+	<!-- Required Global Properties -->
+	<globalProperty>
+		<property>@MODULE_ID@.MOHFacilityCode</property>
+		<defaultValue>15204</defaultValue>
+		<description>
+			Site specific Master facility code that is available on http://www.ehealth.or.ke/facilities/
+		</description>
+	</globalProperty>
+    <globalProperty>
+        <property>@MODULE_ID@.file_dir</property>
+        <defaultValue>amrsreport/files</defaultValue>
+        <description>Directory for storing file temporarily for processing</description>
+    </globalProperty>
+	<!-- /Required Global Properties -->
+	
+
+	<dwr>
+		<allow>
+			<create creator="new" javascript="DWRAmrsReportService">
+				<param name="class" value="@MODULE_PACKAGE@.web.dwr.DWRAmrsReportService"/>
+				<include method="viewMoreDetails"/>
+                <include method="viewMoreDetailsRender"/>
+                <include method="downloadCSV"/>
+                <include method="downloadPDF"/>
+			</create>
+		</allow>
+
+		<signatures>
+			<![CDATA[
+			import @MODULE_PACKAGE@.@MODULE_ID@.web.dwr.DWRAmrsReportService;
+			DWRAmrsReportService.viewMoreDetails(String file,String amrsid);
+			DWRAmrsReportService.viewMoreDetailsRender(String bff,String id);
+			DWRAmrsReportService.downloadCSV(String csvFile);
+			DWRAmrsReportService.downloadPDF(String file);
+			]]>
+		</signatures>	
+	</dwr>
+
+	
+	<!-- Servlets -->
+	<!-- Accessed through the url /pageContext()/moduleServlet/<moduleId>/<servlet-name> 
+	<servlet>
+		<servlet-name>formDownload</servlet-name>
+		<servlet-class>@MODULE_PACKAGE@.web.FormDownloadServlet</servlet-class>
+	</servlet>
+	-->
+	<!-- /Servlets -->
+	
+	
+	<!-- Internationalization -->
+	<!-- All message codes should start with @MODULE_ID@.* -->
+	<messages>
+		<lang>en</lang>
+		<file>messages.properties</file>
+	</messages>
+	<messages>
+		<lang>fr</lang>
+		<file>messages_fr.properties</file>
+	</messages>
+	<messages>
+		<lang>es</lang>
+		<file>messages_es.properties</file>
+	</messages>
+	<!-- /Internationalization -->
+	
+</module>
+

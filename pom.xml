@@ -12,10 +12,10 @@
 	<url>http://wiki.ampath.or.ke/display/data/Comprehensive+Care+Clinic+Pre+ART+Register+MOH+361A</url>
 
 	<scm>
-		<connection>scm:svn:http://svn.openmrs.org/openmrs-modules/amrsreports/trunk/</connection>
-		<developerConnection>scm:svn:http://svn.openmrs.org/openmrs-modules/amrsreports/trunk/</developerConnection>
-		<url>http://svn.openmrs.org/openmrs-modules/amrsreports/trunk/</url>
-	</scm>
+        <connection>scm:git:https://github.com/AMPATH/openmrs-module-amrsreport.git</connection>
+        <developerConnection>scm:git:https://github.com/AMPATH/openmrs-module-amrsreport.git</developerConnection>
+        <url>https://github.com/AMPATH/openmrs-module-amrsreport</url>
+    	</scm>
 
 	<modules>
 		<module>api</module>
